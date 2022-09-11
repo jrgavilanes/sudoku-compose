@@ -3,14 +3,15 @@ package com.example.sudokujanrax
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -63,12 +64,34 @@ fun GameScreen(navigationController: NavHostController? = null) {
     Box(
         Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(2.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = "HOla esta guay",
-            Modifier.clickable { navigationController?.navigate(Routes.ScreenHome.id) }
-        )
+        Column() {
+            Text(
+                text = "HOla esta guay",
+                Modifier.clickable { navigationController?.navigate(Routes.ScreenHome.id) }
+                    .fillMaxWidth().background(
+                        Color.Red
+                    )
+            )
+            Row(Modifier.weight(1f)) {
+                Recycler()
+            }
+            Row(Modifier.fillMaxWidth().background(Color.Blue)) {
+                Text(text = "Opcion 1")
+                Spacer(modifier = Modifier.size(10.dp))
+                Text(text = "Opcion 2")
+            }
+        }
+    }
+}
+
+@Composable
+fun Recycler() {
+    LazyColumn() {
+        (1..2000).map {
+            item { Text("numero $it", Modifier.padding(2.dp)) }
+        }
     }
 }
