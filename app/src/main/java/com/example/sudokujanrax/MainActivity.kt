@@ -164,8 +164,10 @@ fun Recycler() {
                             .padding(4.dp)
                             .size(30.dp)
                             .clickable {
-                                lista[selectedPosition - 1] = value.toString()[0]
-                                sudoku = lista.clone()
+                                if (selectedPosition - 1 >= 0) {
+                                    lista[selectedPosition - 1] = value.toString()[0]
+                                    sudoku = lista.clone()
+                                }
                             },
                         contentAlignment = Alignment.Center
                     ) {
